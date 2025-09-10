@@ -1,0 +1,81 @@
+using static System.Console; // Не хочу писать много раз console, знаю что пловато так сокращать,
+                             // но не могу запомнить почему и пока с проблемами не встречался.
+                             // Ну так прикол, на мою привычку и прочее не влияет.
+
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Вводим первое число
+        Write("Input first number: ");
+        if (!Int32.TryParse(ReadLine(), out var a))            
+        {
+            WriteLine("Not a number");
+            return;
+        }
+
+        // Вводим второе число
+        Write("Input second number: ");
+        if (!Int32.TryParse(ReadLine(), out var b))
+        {
+            WriteLine("Not b number");
+            return;
+        }
+
+        // Вводим знак
+        Write("Input sign: ");
+        var s = ReadLine();
+        var boolVar = true;
+        if (s.Length == 0 || s.Length > 1 && !boolVar)
+        {
+            WriteLine("Wrong sign");
+            return;
+        }
+
+        int result = 0; // Добавляем некий счётчик
+
+
+        switch (s[0]) // Выбор знака
+        {
+            /*case '+':
+                WriteLine("Result of {0} + {1} = {2}", a, b, a + b);
+                break;
+            */
+            
+            // Меняю код с урока на другой, что б вычислять 2-ичные и 16-ричные числа, как понял из задания.
+            
+            case '+':
+                WriteLine(); // Что бы просто немного разделить вводимое с выводимым...
+                result = a + b;
+                break;
+            case '-':
+                WriteLine();
+                result = a - b;
+                break;
+            case '*':
+                WriteLine();
+                result = a * b;
+                break;
+            case '/':
+                WriteLine();
+                result = a / b;
+                break;
+            case '%':
+                WriteLine();
+                result = a % b;
+                break;
+
+            default:
+                WriteLine("Wrong sign");
+                break;            
+        }
+                
+        WriteLine("Result of {0} {1} {2} = {3}", a, s[0], b, result);
+        
+        // Вывод в двоичную и шестнадцатеричную систему. Первый вывод отделяем от общего результата
+        WriteLine("\nBinary representation: " + Convert.ToString(result, 2));
+        WriteLine("Hexadecimal representation: " + Convert.ToString(result, 16));
+
+    }
+}
