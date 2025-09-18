@@ -1,4 +1,4 @@
-using static System.Console; // Не хочу писать много раз console, знаю что пловато так сокращать,
+using static System.Console; // Не хочу писать много раз console, знаю что плоховато так сокращать,
                              // но не могу запомнить почему и пока с проблемами не встречался.
                              // Ну так прикол, на мою привычку и прочее не влияет.
 
@@ -9,7 +9,7 @@ class Program
     {
         // Вводим первое число
         Write("Input first number: ");
-        if (!Int32.TryParse(ReadLine(), out var a))            
+        if (!Int32.TryParse(ReadLine(), out var firstNumber))            
         {
             WriteLine("Not a number");
             return;
@@ -17,7 +17,7 @@ class Program
 
         // Вводим второе число
         Write("Input second number: ");
-        if (!Int32.TryParse(ReadLine(), out var b))
+        if (!Int32.TryParse(ReadLine(), out var secondNumber))
         {
             WriteLine("Not b number");
             return;
@@ -25,18 +25,18 @@ class Program
 
         // Вводим знак
         Write("Input sign: ");
-        var s = ReadLine();
-        var boolVar = true;
-        if (s.Length == 0 || s.Length > 1 && !boolVar)
-        {
-            WriteLine("Wrong sign");
+        var oper = ReadLine();
+        if (string.IsNullOrEmpty(oper) || oper.Length != 1)
+
+            {
+                WriteLine("Wrong sign");
             return;
         }
 
         int result = 0; // Добавляем некий счётчик
 
 
-        switch (s[0]) // Выбор знака
+        switch (oper[0]) // Выбор знака
         {
             /*case '+':
                 WriteLine("Result of {0} + {1} = {2}", a, b, a + b);
@@ -47,31 +47,43 @@ class Program
             
             case '+':
                 WriteLine(); // Что бы просто немного разделить вводимое с выводимым...
-                result = a + b;
+                result = firstNumber + secondNumber;
                 break;
             case '-':
                 WriteLine();
-                result = a - b;
+                result = firstNumber - secondNumber;
                 break;
             case '*':
                 WriteLine();
-                result = a * b;
+                result = firstNumber * secondNumber;
                 break;
             case '/':
                 WriteLine();
-                result = a / b;
+                result = firstNumber / secondNumber;
                 break;
             case '%':
                 WriteLine();
-                result = a % b;
+                result = firstNumber % secondNumber;
                 break;
+
+            // Добавляем побитовые операторы
+            case '&':
+                result = firstNumber & secondNumber;
+                break;
+            case '|':
+                result = firstNumber | secondNumber;
+                break;
+            case '^':
+                result = firstNumber ^ secondNumber;
+                break;
+
 
             default:
                 WriteLine("Wrong sign");
-                break;            
+                return;            
         }
                 
-        WriteLine("Result of {0} {1} {2} = {3}", a, s[0], b, result);
+        WriteLine("\nResult of {0} {1} {2} = {3}", firstNumber, oper[0], secondNumber, result);
         
         // Вывод в двоичную и шестнадцатеричную систему. Первый вывод отделяем от общего результата
         WriteLine("\nBinary representation: " + Convert.ToString(result, 2));
