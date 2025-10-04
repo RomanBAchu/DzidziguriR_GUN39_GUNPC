@@ -1,0 +1,110 @@
+using static System.Console; // Не хочу писать много раз console, знаю что плоховато так сокращать,
+                             // но не могу запомнить почему и пока с проблемами не встречался.
+                             // Ну так прикол, на мою привычку и прочее не влияет.using static System.Console;
+
+
+namespace HomeWork
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            // Задание 1: Массив чисел Фибоначчи
+            int[] fibonacciArray = new int[8];
+            fibonacciArray[0] = 0;
+            fibonacciArray[1] = 1;
+            for (int i = 2; i < 8; i++)
+            {
+                fibonacciArray[i] = fibonacciArray[i - 1] + fibonacciArray[i - 2];
+            }
+
+            // Задание 2: Массив названий месяцев
+            string[] monthsArray = {
+                "January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+            };
+
+            // Задание 3: Двумерный массив (матрица)
+            int[,] matrix = new int[3, 3] {
+                { (int)Math.Pow(2, 1), (int)Math.Pow(3, 1), (int)Math.Pow(4, 1) },
+                { (int)Math.Pow(2, 2), (int)Math.Pow(3, 2), (int)Math.Pow(4, 2) },
+                { (int)Math.Pow(2, 3), (int)Math.Pow(3, 3), (int)Math.Pow(4, 3) }
+            };
+
+            // Задание 4: Ломанный массив (jagged array)
+            double[][] jaggedArray = new double[3][];
+            jaggedArray[0] = new double[] { 1, 2, 3, 4, 5 };
+            jaggedArray[1] = new double[] { Math.E, Math.PI };
+            jaggedArray[2] = new double[] { Math.Log10(1), Math.Log10(10), Math.Log10(100), Math.Log10(1000) };
+
+            // массивы для заданий 5 и 6.
+            int[] array = { 1, 2, 3, 4, 5 };
+            int[] array2 = { 7, 8, 9, 10, 11, 12, 13 };
+            CopyArrays(array, array2, 3);
+
+            WriteLine("Массив array2 после копирования:");
+            for (int i = 0; i < array2.Length; i++)
+            {
+                Write(array2[i] + " ");
+            }
+            WriteLine();
+
+            ResizeArray(ref array, array.Length * 2);
+
+            WriteLine("Массив array после изменения размера:");
+            for (int i = 0; i < array.Length; i++)
+            {
+                Write(array[i] + " ");
+            }
+            WriteLine();
+
+            // Вывод массивов (для проверки)
+            WriteLine("Массив Фибоначчи:");
+            for (int i = 0; i < fibonacciArray.Length; i++)
+            {
+                Write(fibonacciArray[i] + " ");
+            }
+            WriteLine();
+
+            WriteLine("Массив месяцев:");
+            for (int i = 0; i < monthsArray.Length; i++)
+            {
+                Write(monthsArray[i] + " ");
+            }
+            WriteLine();
+
+            WriteLine("Двумерный массив (матрица):");
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    Write(matrix[i, j] + " ");
+                }
+                WriteLine();
+            }
+
+            WriteLine("Ломанный массив:");
+            for (int i = 0; i < jaggedArray.Length; i++)
+            {
+                Write($"Массив {i + 1}: ");
+                for (int j = 0; j < jaggedArray[i].Length; j++)
+                {
+                    Write(jaggedArray[i][j] + " ");
+                }
+                WriteLine();
+            }
+        }
+
+        //Задание 5
+        static void CopyArrays(int[] sourceArray, int[] destinationArray, int length)
+        {
+            Array.Copy(sourceArray, destinationArray, length);
+        }
+
+        //Задание 6
+        static void ResizeArray(ref int[] array, int newSize)
+        {
+            Array.Resize(ref array, newSize);
+        }
+    }
+}
