@@ -1,0 +1,48 @@
+
+public class Unit
+{
+    private float _health;
+
+    public string Name { get; } // Только для чтения, значит гэт без сета
+    public float Health
+    {
+        get { return _health; }
+    }
+    // public float Health => _health; // Так сложнее для понимания, вроде.
+
+    private float _armor { get; } // В уроке высматрел, но впринципе можно и Армор по заданию, но так интересней.
+    public int Damage { get; }    
+
+    public Unit() : this("Unknown Unit")  // Берём свойства в другом конструкторе, ну или чтото типо того.
+                                          // Что-то типо, (забегая вперёд...), как в юнити - наследование
+                                          // и монобехевор, наследование класса, но здесь не наследование... ???...
+    {
+    }
+
+    public Unit(string name)
+    {
+        Name = name;
+        _health = 100f; // Начальное здоровье
+        _armor = 0.6f;    // Задаем броню
+        Damage = 5;      // Задаем урон
+    }
+
+    public float GetRealHealth()
+    {
+        return Health * (1f + _armor);
+    }
+
+    public bool SetDamage(float value) // Добавляе магическую переменную
+    {
+        _health -= value * _armor; // Уменьшаем здоровье с учетом брони
+
+        if (Health <= 0f)
+        {
+            return true; // Юнит погиб
+        }
+        else
+        {
+            return false; // Юнит жив
+        }
+    }
+}
