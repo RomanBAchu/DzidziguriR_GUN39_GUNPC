@@ -1,0 +1,52 @@
+using System;
+
+public struct Interval
+{
+    // Свойства
+    public float Min { get; }
+    public float Max { get; }
+
+    // Генератор случайных чисел
+    private static readonly Random random = new Random(); // static чтобы не создавать каждый раз новый
+
+    // Конструктор
+    public Interval(int minValue, int maxValue)
+    {
+        // Проверки допустимости входных значений
+        if (minValue > maxValue)
+        {
+            Console.WriteLine($"[Interval] Внимание: minValue ({minValue}) больше maxValue ({maxValue}). Меняем значения местами.");
+            int temp = minValue;
+            minValue = maxValue;
+            maxValue = temp;
+        }
+
+        if (minValue < 0)
+        {
+            Console.WriteLine($"[Interval] Внимание: minValue ({minValue}) меньше 0. Устанавливаем 0.");
+            minValue = 0;
+        }
+
+        if (maxValue < 0)
+        {
+            Console.WriteLine($"[Interval] Внимание: maxValue ({maxValue}) меньше 0. Устанавливаем 0.");
+            maxValue = 0;
+        }
+
+
+        if (minValue == maxValue)
+        {
+            Console.WriteLine($"[Interval] Внимание: minValue ({minValue}) равен maxValue ({maxValue}). Увеличиваем maxValue на 10.");
+            maxValue += 10;
+        }
+
+        Min = minValue;
+        Max = maxValue;
+    }
+
+    // Получить случайное значение между Min и Max
+    public float Get()
+    {
+        return (float)(random.NextDouble() * (Max - Min) + Min);
+    }
+}
